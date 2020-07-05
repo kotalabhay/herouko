@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abhay | Dashboard</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
+ 
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="d3.layout.cloud.js"></script>
+  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+     
+    </ul>
+
+    <!-- SEARCH FORM -->
+
+
+    <!-- Right navbar links -->
+   
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{{ url_for('index') }}" class="brand-link">
+      <img src="dist/img/abhay.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Abhay Kotal</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/harsh.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="{{ url_for('index') }}" class="d-block">Harsh Mendapara</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url_for('index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>World Map Tweets</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url_for('sentiment') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sentiment Tweets</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url_for('wordcloud') }}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Word Cloud</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url_for('emotion') }}" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Emotions</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+
+
+  <!-- /.content-wrapper -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <h1 align="center"> Word Cloud</h1>
+      <div id="myChart"></div>
+
+      <script type="text/javascript">
+
+      var graphData = {{data.chart_data|safe}}
+
+      //console.log(graphData);
+
+//       $(jQuery.parseJSON(JSON.stringify(graphData))).each(function() {  
+//          var abhay= this.cleaned_text;
+
+// });
+
+data=[];
+graphData.forEach(function(element) {
+      data.push(element.cleaned_text);
+    });
+
+
+
+
+
+//       d3.json(clean, function(error, data) {
+//     console.log(data); // this is your data
+// });
+
+var fill = d3.scale.category20();
+
+var Data = data, 
+ TempData=Data.slice(0,1000);
+ new_data=TempData.join()
+
+  new_text=Data.slice(7000,8000);
+  ak_text=new_text.join();
+
+
+
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+    zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
+ 
+    var myConfig = {
+      type: 'wordcloud',
+      options: {
+        text:new_data,
+        minLength: 5,
+        ignore: [ "Applause", "Because", "because", "could", "don’t", "people", "That’s", "that’s", "Their", "their", "there", "these", "thing", "those", "through", "We’re", "we’re", "where", "would"],
+        maxItems: 40,
+        aspect: 'flow-center',
+ 
+        colorType: 'palette',
+        palette: ['#D32F2F', '#5D4037', '#1976D2', '#E53935', '#6D4C41', '#1E88E5', '#F44336', '#795548', '#2196F3', '#EF5350', '#8D6E63', '#42A5F5'],
+ 
+        style: {
+          fontFamily: 'Crete Round',
+ 
+          hoverState: {
+            backgroundColor: '#D32F2F',
+            borderRadius: 2,
+            fontColor: 'white'
+          },
+          tooltip: {
+            text: '%text: %hits',
+            visible: true,
+            alpha: 0.9,
+            backgroundColor: '#1976D2',
+            borderRadius: 2,
+            borderColor: 'none',
+            fontColor: 'white',
+            fontFamily: 'Georgia',
+            textAlpha: 1
+          }
+        }
+      },
+    source: {
+    text: ak_text,
+    //Source: https://obamawhitehouse.archives.gov/the-press-office/2015/03/07/remarks-president-50th-anniversary-selma-montgomery-marches
+    fontColor: '#64B5F6',
+    fontSize: 10,
+    fontFamily: 'Georgia',
+    fontWeight: 'normal',
+    marginBottom: '10%'
+  }
+};
+zingchart.render({
+  id: 'myChart',
+  data: myConfig,
+  height: 400,
+  width: '100%'
+});
+// d3.csv("sentiment_labeled_name_category_final.csv", function(data) {
+//     // build the list of city names
+//     data.forEach( function (d) {
+//         textData.push(d.cleaned_text);
+//     });
+
+//     d3.layout.cloud().size([500, 500])
+//         .words(textData.map(function(d) {
+//             return {text: d, size: 10 + Math.random() * 90};
+//         }))
+//         .rotate(function() { return ~~(Math.random() * 2) * 90; })
+//         .font("Impact")
+//         .fontSize(function(d) { return d.size; })
+//         .on("end", draw)
+//         .start();
+
+// // });
+
+// function draw(words) {
+// d3.select("body").append("svg")
+//     .attr("width", 500)
+//     .attr("height", 500)
+//     .append("g")
+//     .attr("transform", "translate(150,150)")
+//     .selectAll("text")
+//     .data(words)
+//     .enter().append("text")
+//     .style("font-size", function(d) { return d.size + "px"; })
+//     .style("font-family", "Impact")
+//     .style("fill", function(d, i) { return fill(i); })
+//     .attr("text-anchor", "middle")
+//     .attr("transform", function(d) {
+//         return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+//     })
+//     .text(function(d) { return d.text; });
+// }			
+
+      </script>
+      <break>
+  <div id="akChart"></div>
+
+  <script>
+
+
+text_value=data.slice(0,3000);
+text_merge=text_value.join();
+
+
+var myConfig = {
+  type: 'wordcloud',
+  options: {
+    text:text_merge ,
+  }
+};
+ 
+zingchart.render({
+  id: 'akChart',
+  data: myConfig,
+  height: 400,
+  width: '100%'
+});
+
+  </script>
+
+
+
+      </div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+</body>
+</html>
