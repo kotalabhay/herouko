@@ -2,6 +2,6 @@
 applications:
  - name: GetStartedPython
    random-route: true
-   memory: 256M
+   memory: 512M
 
 
