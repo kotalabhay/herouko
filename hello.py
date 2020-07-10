@@ -8,7 +8,6 @@ import atexit
 import os
 import json
 import pandas as  pd
-import numpy as np
 
 app = Flask(__name__, static_url_path='',template_folder='static')
 
